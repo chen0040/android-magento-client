@@ -12,5 +12,5 @@ public class Mediator {
    public static final String adminUsername = "admin";
    public static final String adminPassword = "admin0040@";
 
-   
+
 }
