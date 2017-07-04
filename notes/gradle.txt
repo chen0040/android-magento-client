@@ -10,6 +10,10 @@ To build the gradle project (and skip test)
 
 gradlew clean build -x test
 
-To upload the project to maven, follow the link below:
+To upload the project to maven, run the following command:
+
+./gradlew clean build -x test -Prelease uploadArchives closeAndPromoteRepository
+
+for more details on deploying to maven, follow the link below:
 
 http://nemerosa.ghost.io/2015/07/01/publishing-to-the-maven-central-using-gradle/
