@@ -12,7 +12,7 @@ gradlew clean build -x test
 
 To upload the project to maven, run the following command:
 
-./gradlew clean build -x test -Prelease uploadArchives closeAndPromoteRepository
+./gradlew clean build -x test -Prelease uploadArchives closeAndReleaseRepository
 
 for more details on deploying to maven, follow the link below:
 
