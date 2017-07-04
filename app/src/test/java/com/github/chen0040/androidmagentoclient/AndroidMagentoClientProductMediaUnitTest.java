@@ -1,10 +1,13 @@
-package chen0040.github.com.androidmagentoclient;
+package com.github.chen0040.androidmagentoclient;
 
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.github.chen0040.magento.MagentoClient;
+import com.github.chen0040.androidmagentoclient.AndroidMagentoClient;
 import com.github.chen0040.magento.models.Product;
+
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.junit.Test;
@@ -17,9 +20,10 @@ import java.io.InputStream;
 /**
  * Created by xschen on 15/6/2017.
  */
-public class MagentoClientProductMediaUnitTest {
+@RunWith(RobolectricTestRunner.class)
+public class AndroidMagentoClientProductMediaUnitTest  extends AndroidMagentoLogContext{
 
-   private static final Logger logger = LoggerFactory.getLogger(MagentoClientProductMediaUnitTest.class);
+
 
 
 
@@ -27,7 +31,7 @@ public class MagentoClientProductMediaUnitTest {
    @Test
    public void test_get_product_media_list() {
       String productSku = "B202-SKU";
-      MagentoClient client = new MagentoClient(Mediator.url);
+      AndroidMagentoClient client = new AndroidMagentoClient(Mediator.url);
       client.loginAsAdmin(Mediator.adminUsername, Mediator.adminPassword);
       logger.info("media list: \r\n{}", JSON.toJSONString(client.media().getProductMediaList(productSku), SerializerFeature.PrettyFormat));
    }
@@ -35,7 +39,7 @@ public class MagentoClientProductMediaUnitTest {
    @Test
    public void test_get_product_media_urls() {
       String productSku = "B202-SKU";
-      MagentoClient client = new MagentoClient(Mediator.url);
+      AndroidMagentoClient client = new AndroidMagentoClient(Mediator.url);
       client.loginAsAdmin(Mediator.adminUsername, Mediator.adminPassword);
       logger.info("media absolute urls: \r\n{}", JSON.toJSONString(client.media().getProductMediaAbsoluteUrls(productSku), SerializerFeature.PrettyFormat));
       logger.info("media relative urls: \r\n{}", JSON.toJSONString(client.media().getProductMediaRelativeUrls(productSku), SerializerFeature.PrettyFormat));
@@ -44,7 +48,7 @@ public class MagentoClientProductMediaUnitTest {
    @Test
    public void test_get_product_media_url() {
       String productSku = "B202-SKU";
-      MagentoClient client = new MagentoClient(Mediator.url);
+      AndroidMagentoClient client = new AndroidMagentoClient(Mediator.url);
       client.loginAsAdmin(Mediator.adminUsername, Mediator.adminPassword);
       long entryId = 1L;
       logger.info("media absoluate url: \r\n{}", JSON.toJSONString(client.media().getProductMediaAbsoluteUrl(productSku, entryId), SerializerFeature.PrettyFormat));
@@ -54,7 +58,7 @@ public class MagentoClientProductMediaUnitTest {
    @Test
    public void test_get_product_media() {
       String productSku = "B202-SKU";
-      MagentoClient client = new MagentoClient(Mediator.url);
+      AndroidMagentoClient client = new AndroidMagentoClient(Mediator.url);
       client.loginAsAdmin(Mediator.adminUsername, Mediator.adminPassword);
       long entryId = 1L;
       logger.info("media: \r\n{}", JSON.toJSONString(client.media().getProductMedia(productSku, entryId), SerializerFeature.PrettyFormat));
@@ -63,7 +67,7 @@ public class MagentoClientProductMediaUnitTest {
    @Test
    public void test_delete_product_media() {
       String productSku = "B202-SKU";
-      MagentoClient client = new MagentoClient(Mediator.url);
+      AndroidMagentoClient client = new AndroidMagentoClient(Mediator.url);
       client.loginAsAdmin(Mediator.adminUsername, Mediator.adminPassword);
       long entryId = 2L;
       logger.info("media deleted: \r\n{}", JSON.toJSONString(client.media().deleteProductMedia(productSku, entryId), SerializerFeature.PrettyFormat));
@@ -73,7 +77,7 @@ public class MagentoClientProductMediaUnitTest {
    public void test_upload_image() throws IOException {
       String productSku = "B202-SKU";
 
-      MagentoClient client = new MagentoClient(Mediator.url);
+      AndroidMagentoClient client = new AndroidMagentoClient(Mediator.url);
       client.loginAsAdmin(Mediator.adminUsername, Mediator.adminPassword);
 
       String filename = "/m/b/mb01-blue-0.png";
@@ -81,7 +85,7 @@ public class MagentoClientProductMediaUnitTest {
       String type = "image/png";
       String imageFileName = "new_image.png";
 
-      InputStream inputStream = MagentoClientProductUnitTest.class.getClassLoader().getResourceAsStream("sample.png");
+      InputStream inputStream = AndroidMagentoClientProductUnitTest.class.getClassLoader().getResourceAsStream("sample.png");
 
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
       int length;
@@ -97,7 +101,7 @@ public class MagentoClientProductMediaUnitTest {
    public void test_update_image() throws IOException {
       String productSku = "B202-SKU";
 
-      MagentoClient client = new MagentoClient(Mediator.url);
+      AndroidMagentoClient client = new AndroidMagentoClient(Mediator.url);
       client.loginAsAdmin(Mediator.adminUsername, Mediator.adminPassword);
 
       String filename = "/m/b/mb01-blue-0.png";
@@ -105,7 +109,7 @@ public class MagentoClientProductMediaUnitTest {
       String type = "image/png";
       String imageFileName = "new_image.png";
 
-      InputStream inputStream = MagentoClientProductUnitTest.class.getClassLoader().getResourceAsStream("sample.png");
+      InputStream inputStream = AndroidMagentoClientProductUnitTest.class.getClassLoader().getResourceAsStream("sample.png");
 
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
       int length;

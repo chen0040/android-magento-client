@@ -17,6 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -25,10 +26,13 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile('com.github.chen0040:java-magento-client:1.0.6') {
+    compile('com.github.chen0040:java-magento-client:1.0.8') {
         exclude module: 'httpclient'
+        exclude module: 'slf4j-log4j12'
     }
     testCompile 'junit:junit:4.12'
-    testCompile group: 'com.alibaba', name: 'fastjson', version: '1.1.43.android'
-    compile group: 'org.slf4j', name: 'slf4j-android', version: '1.6.1-RC1'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.1.43.android'
+    testCompile "org.robolectric:robolectric:3.3.2"
+
+    compile group: 'org.slf4j', name: 'slf4j-android', version: '1.7.7'
 }
