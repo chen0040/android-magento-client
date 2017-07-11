@@ -6,7 +6,7 @@
 
 Add the following line to your build.gradle of your Android project:
 
-compile 'com.github.chen0040:android-magento-client:1.0.1'
+compile 'com.github.chen0040:android-magento-client:1.0.2'
 
 ### Maven
 
@@ -16,20 +16,22 @@ Add the following dependency to the POM file of your Android project:
 <dependency>
   <groupId>com.github.chen0040</groupId>
   <artifactId>android-magento-client</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <type>aar</type>
 </dependency>
 ```
 
 # Features
 
-* Support for token based authentication (ideal for Android or Spring application)
+* Support for token based authentication (ideal for Android application)
 * Support for V1 rest api at the current version of Magento which is Magento2 version 2.16
 * Allow access to:
     * Product (CRUD)
     * Product Media (CRUD)
     * Product Inventory (RU)
     * Product Categories (CRUD)
+    * Guest Shopping Cart (CRUD)
+    * My Shopping Cart (CRUD)
     * Account (R)
 
 
@@ -250,6 +252,95 @@ StockItems inventory_for_sku = client.inventory().getStockItems(productSku);
 inventory_for_sku.setQty(10);
 String stockId = client.inventory().saveStockItems(productSku, inventory_for_sku);
 ```
+
+### Guest Shopping Cart
+
+The sample code below shows how to create a new guest shopping cart, add/update/delete items in the shopping cart:
+
+Note that creating guest shopping cart does not require login
+
+```java
+AndroidMagentoClient client = new AndroidMagentoClient(Mediator.url);
+String cartId = client.guestCart().newCart();
+
+CartItem item = new CartItem();
+item.setQty(1);
+item.setSku("product_dynamic_758");
+
+// add new item to shopping cart
+item = client.guestCart().addItemToCart(cartId, item);
+System.out.println("cartItem: " + JSON.toJSONString(item, SerializerFeature.PrettyFormat));
+
+// update item in the shopping cart
+item.setQty(3);
+item = client.guestCart().updateItemInCart(cartId, item);
+System.out.println("cartItem: " + JSON.toJSONString(item, SerializerFeature.PrettyFormat));
+
+// delete item in the shopping cart
+boolean deleted = client.guestCart().deleteItemInCart(cartId, item.getItem_id());
+
+Cart cart = client.guestCart().getCart(cartId);
+CartTotal cartTotal = client.getGuestCart().getCartTotal(cartId);
+
+System.out.println("cart: " + JSON.toJSONString(cart, SerializerFeature.PrettyFormat));
+System.out.println("cartTotal: " + JSON.toJSONString(cartTotal, SerializerFeature.PrettyFormat));
+```
+
+The sample code belows show how to transfer a guest cart to my cart after user login:
+
+```bash
+AndroidMagentoClient client = new AndroidMagentoClient(Mediator.url);
+
+String cartId = client.guestCart().newCart();
+
+CartItem item = new CartItem();
+item.setQty(1);
+item.setSku("product_dynamic_758");
+
+item = client.guestCart().addItemToCart(cartId, item);
+
+client.loginAsClient("username", "password");
+boolean result = client.myCart().transferGuestCartToMyCart(cartId);
+
+Cart cart = client.myCart().getCart();
+CartTotal cartTotal = client.myCart().getCartTotal();
+
+```
+
+### My Shopping Cart
+
+The sample code below shows how to create my shopping cart, add/update/delete items in the shopping cart:
+
+Note that creating my shopping cart requires login
+
+```java
+AndroidMagentoClient client = new AndroidMagentoClient(Mediator.url);
+client.loginAsClient("username", "password");
+String quoteId = client.myCart().newQuote();
+
+CartItem item = new CartItem();
+item.setQty(1);
+item.setSku("product_dynamic_758");
+
+// add new item to shopping cart
+item = client.myCart().addItemToCart(quoteId, item);
+System.out.println("cartItem: " + JSON.toJSONString(item, SerializerFeature.PrettyFormat));
+
+// update item in the shopping cart
+item.setQty(3);
+item = client.myCart().updateItemInCart(quoteId, item);
+System.out.println("cartItem: " + JSON.toJSONString(item, SerializerFeature.PrettyFormat));
+
+// delete item in the shopping cart
+boolean deleted = client.myCart().deleteItemInCart(item.getItem_id());
+
+Cart cart = client.myCart().getCart();
+CartTotal cartTotal = client.myCart().getCartTotal();
+
+System.out.println("cart: " + JSON.toJSONString(cart, SerializerFeature.PrettyFormat));
+System.out.println("cartTotal: " + JSON.toJSONString(cartTotal, SerializerFeature.PrettyFormat));
+```
+
 
 # Notes
 
