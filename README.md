@@ -28,6 +28,8 @@ android {
 }
 ```
 
+If failed to download from jcenter() repository, add mavenCentral() into in the repositories declaration section of your gradle.build file.
+
 ### Maven
 
 Add the following dependency to the POM file of your Android project:
