@@ -8,6 +8,26 @@ Add the following line to your build.gradle of your Android project:
 
 compile 'com.github.chen0040:android-magento-client:1.0.2'
 
+As the project makes uses of features in Java 8 therefore you need to enable Java 8 support in your Android project by adding the following to your gradle.build file:
+
+```
+android {
+  ...
+  
+    defaultConfig {
+        ...
+		
+        jackOptions {
+            enabled true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+```
+
 ### Maven
 
 Add the following dependency to the POM file of your Android project:
