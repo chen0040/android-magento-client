@@ -27,9 +27,20 @@ public class OkHttpComponent implements HttpComponent {
         client = new OkHttpClient.Builder().build();
     }
 
+    private static final String REQUEST_MEDIA_TYPE_JSON = "application/json; charset=utf-8";
+    private static final String REQUEST_MEDIA_TYPE_TEXT = "text/plain; charset=utf-8";
+
     @Override
     public String post(String url, String body, Map<String, String> headers) {
-        MediaType textPlainMT = MediaType.parse("text/plain; charset=utf-8");
+
+        String type = REQUEST_MEDIA_TYPE_TEXT;
+        if(headers.containsKey("Content-Type") && headers.get("Content-Type").equalsIgnoreCase("application/json")){
+            type = REQUEST_MEDIA_TYPE_JSON;
+        } else if(headers.containsKey("content-type") && headers.get("content-type").equalsIgnoreCase("application/json")){
+            type = REQUEST_MEDIA_TYPE_JSON;
+        }
+
+        MediaType textPlainMT = MediaType.parse(type);
 
         Request.Builder requestBuilder = new Request.Builder().url(url)
                 .post(RequestBody.create(textPlainMT, body));
@@ -60,7 +71,14 @@ public class OkHttpComponent implements HttpComponent {
     @Override
     public String put(String url, String body, Map<String, String> headers) {
 
-        MediaType textPlainMT = MediaType.parse("text/plain; charset=utf-8");
+        String type = REQUEST_MEDIA_TYPE_TEXT;
+        if(headers.containsKey("Content-Type") && headers.get("Content-Type").equalsIgnoreCase("application/json")){
+            type = REQUEST_MEDIA_TYPE_JSON;
+        } else if(headers.containsKey("content-type") && headers.get("content-type").equalsIgnoreCase("application/json")){
+            type = REQUEST_MEDIA_TYPE_JSON;
+        }
+
+        MediaType textPlainMT = MediaType.parse(type);
 
         Request.Builder requestBuilder = new Request.Builder().url(url)
                 .put(RequestBody.create(textPlainMT, body));
