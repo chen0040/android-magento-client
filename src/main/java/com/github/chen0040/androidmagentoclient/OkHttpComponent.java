@@ -30,6 +30,14 @@ public class OkHttpComponent implements HttpComponent {
     private static final String REQUEST_MEDIA_TYPE_JSON = "application/json; charset=utf-8";
     private static final String REQUEST_MEDIA_TYPE_TEXT = "text/plain; charset=utf-8";
 
+    public void setClient(OkHttpClient client) {
+        this.client = client;
+    }
+
+    public OkHttpClient getClient() {
+        return this.client;
+    }
+
     @Override
     public String post(String url, String body, Map<String, String> headers) {
 
