@@ -8,7 +8,7 @@ android {
 
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 3
+        versionCode 4
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -17,6 +17,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
 }
@@ -29,7 +33,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile('com.github.chen0040:java-magento-client:1.0.9') {
+    compile('com.github.chen0040:java-magento-client:1.0.11') {
         exclude module: 'httpclient'
         exclude module: 'slf4j-log4j12'
         exclude module: 'fastjson'
@@ -124,7 +128,7 @@ if (project.hasProperty('release')) {
                         url 'https://github.com/chen0040/android-magento-client'
                         groupId 'com.github.chen0040'
                         artifactId 'android-magento-client'
-                        version '1.0.3'
+                        version '1.0.4'
 
                         scm {
                             url 'https://github.com/chen0040/android-magento-client.git'
