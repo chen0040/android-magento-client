@@ -38,7 +38,7 @@ Add the following dependency to the POM file of your Android project:
 <dependency>
   <groupId>com.github.chen0040</groupId>
   <artifactId>android-magento-client</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <type>aar</type>
 </dependency>
 ```
