@@ -41,7 +41,7 @@ public class AndroidMagentoClientInventoryUnitTest extends AndroidMagentoLogCont
 
       productSku = "B202-SKU";
       StockItems si = client.inventory().getStockItems(productSku);
-      si.setQty(2L);
+      si.setQty(2);
       String stockId = client.inventory().saveStockItems(productSku, si);
       logger.info("stock item saved: {}", stockId);
    }

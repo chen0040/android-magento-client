@@ -9,4 +9,9 @@ public class AndroidLogger {
         text = text.replace("{}", "%s");
         System.out.println(String.format(text, args));
     }
+
+    public void error(String text, Throwable throwable) {
+        System.err.println(text);
+        throwable.printStackTrace();
+    }
 }

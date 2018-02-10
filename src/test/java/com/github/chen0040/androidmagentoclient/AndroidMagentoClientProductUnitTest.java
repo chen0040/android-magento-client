@@ -100,7 +100,7 @@ public class AndroidMagentoClientProductUnitTest extends AndroidMagentoLogContex
       newProduct.setAttribute_set_id(4);
       newProduct.setWeight(1);
 
-      logger.info("add product result: {}", JSON.toJSONString(client.products().addProduct(newProduct), SerializerFeature.PrettyFormat));
+      logger.info("add product result: {}", JSON.toJSONString(client.products().saveProduct(newProduct), SerializerFeature.PrettyFormat));
    }
 
 
